@@ -1,0 +1,18 @@
+<div class="container my-3">
+    <h2>Liste de Formations</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Intitule</th>
+                <th>Programme</th>              
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let elt of formations">
+                <td>{{ elt.id }}</td>
+                <td>{{ elt.intitule }}</td>
+                <td>{{ elt.prixUnitaire }}</td>
+            </tr>
+        </tbody>
+    </table>

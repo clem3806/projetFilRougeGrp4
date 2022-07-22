@@ -1,0 +1,20 @@
+{
+    "formations": [
+        {
+          "Intitule": "Initiation à l’informatique",
+          "prixUnitaire": 1000,
+          "lieu de la session": "Nice",
+          "Programme": "Lorem Ipsum",
+          "date": "22 novembre 2022",
+          "id": 1
+        },
+        {
+            "Intitule": "Java & Prog. Objet",
+            "prixUnitaire": 8000,
+            "lieu de la session": "Nice",
+            "Programme": "Lorem Ipsum",
+            "date": "14 novembre 2022",
+            "id": 2
+        }
+    ]
+}
