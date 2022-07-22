@@ -1,9 +1,15 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -14,6 +20,11 @@ public class Role {
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private String id_role;
 	private String title;
+	
+	// liaison O to O entity Role->User
+		@ManyToMany(cascade = { CascadeType.ALL })
+		private List<User> user = new ArrayList<User>();
+
 
 	public Role() {
 		super();

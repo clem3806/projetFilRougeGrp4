@@ -1,9 +1,15 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -14,6 +20,11 @@ public class Domaine {
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private String id_domaine;
 	private String libelle;
+	
+	// liaison O to O entity Domaine->Theme
+		@OneToMany(cascade = { CascadeType.ALL })
+		private List<Theme> theme = new ArrayList<Theme>();
+
 
 	public Domaine() {
 		super();

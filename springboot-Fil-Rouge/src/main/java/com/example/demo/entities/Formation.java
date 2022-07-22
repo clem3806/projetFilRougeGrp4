@@ -1,22 +1,44 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Formation {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private String id_Formation;
 	private String libelle;
 	private String id_theme;
 	private String id_prerequis;
 	private String id_contact;
+
+	// liaison O to O entity Formation->Contact
+	@OneToOne(cascade = { CascadeType.ALL })
+	private List<Contact> contact = new ArrayList<Contact>();
+
+	// liaison O to O entity Formation->Prerequis
+	@OneToOne(cascade = { CascadeType.ALL })
+	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
+
+	// liaison O to O entity Formation->Session
+	@OneToMany(cascade = { CascadeType.ALL })
+	private List<Session> session = new ArrayList<Session>();
+
+	// liaison O to O entity Formation->Theme
+	@OneToMany(cascade = { CascadeType.ALL })
+	private List<Theme> theme = new ArrayList<Theme>();
 
 	public Formation() {
 		super();

@@ -1,21 +1,36 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Session {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private String id_session;
 	private String libelle;
 	private String id_Formation;
 	private Integer date;
+
+	// liaison O to O entity Session->Formation
+	@ManyToOne(cascade = { CascadeType.ALL })
+	private List<Formation> formation = new ArrayList<Formation>();
+	
+	// liaison O to O entity Session->User
+	@ManyToMany(cascade = { CascadeType.ALL })
+	private List<User> user = new ArrayList<User>();
 
 	public Session() {
 		super();

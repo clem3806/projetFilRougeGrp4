@@ -1,23 +1,43 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+
+import com.example.entities.Sport;
 
 @Entity
 public class User {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
-    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
+	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private Integer id_user;
 	private String nom;
 	private String prenom;
 	private String mdp;
 	private String email;
 	private Integer id_user_details;
+
+	// liaison M to M entity User->Session
+	@ManyToMany(cascade = { CascadeType.ALL })
+	private List<Session> session = new ArrayList<Session>();
+
+	// liaison M to M entity User->Role
+	@ManyToMany(cascade = { CascadeType.ALL })
+	private List<Role> role = new ArrayList<Role>();
+
+	// liaison O to O entity User->userDetails
+	@OneToOne(cascade = { CascadeType.ALL })
+	private List<UserDetails> userdetails = new ArrayList<UserDetails>();
 
 	public User() {
 		super();
@@ -80,5 +100,5 @@ public class User {
 	public void setId_user_details(Integer id_user_details) {
 		this.id_user_details = id_user_details;
 	}
-	
+
 }

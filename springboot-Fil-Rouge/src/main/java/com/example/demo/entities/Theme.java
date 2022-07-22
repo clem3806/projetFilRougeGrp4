@@ -1,9 +1,16 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 @Entity
@@ -15,6 +22,15 @@ public class Theme {
 	private String id_theme;
 	private String id_domaine;
 	private String libelle;
+	
+	// liaison O to O entity Theme->Formation
+		@OneToMany(cascade = { CascadeType.ALL })
+		private List<Formation> formation = new ArrayList<Formation>();
+		
+		// liaison O to O entity Theme->Domaine
+		@ManyToOne(cascade = { CascadeType.ALL })
+		private List<Domaine> domaine = new ArrayList<Domaine>();
+
 
 	public Theme() {
 		super();
