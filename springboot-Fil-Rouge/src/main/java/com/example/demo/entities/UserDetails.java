@@ -1,12 +1,19 @@
-package com.example.demo.models;
+package com.example.demo.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class UserDetails {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private Integer User;
-	private Integer User_Details;
+	private Integer id_User_Details;
 	private String rue;
 	private String ville;
 	private String entreprise;

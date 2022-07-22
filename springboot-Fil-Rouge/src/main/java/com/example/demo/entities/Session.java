@@ -1,10 +1,17 @@
-package com.example.demo.models;
+package com.example.demo.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class Session {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private String id_session;
 	private String libelle;
 	private String id_Formation;
@@ -12,7 +19,6 @@ public class Session {
 
 	public Session() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Session(String id_session, String libelle, String id_Formation, Integer date) {

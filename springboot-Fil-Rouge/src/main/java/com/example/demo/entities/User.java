@@ -1,10 +1,17 @@
-package com.example.demo.models;
+package com.example.demo.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 @Entity
 public class User {
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private Integer id_user;
 	private String nom;
 	private String prenom;
@@ -73,5 +80,5 @@ public class User {
 	public void setId_user_details(Integer id_user_details) {
 		this.id_user_details = id_user_details;
 	}
-
+	
 }
