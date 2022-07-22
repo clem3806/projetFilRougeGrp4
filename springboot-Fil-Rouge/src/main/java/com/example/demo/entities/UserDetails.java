@@ -1,8 +1,5 @@
 package com.example.demo.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +14,6 @@ public class UserDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
-	private Integer User;
 	private Integer id_User_Details;
 	private String rue;
 	private String ville;
@@ -25,38 +21,30 @@ public class UserDetails {
 	private String code_postal;
 
 	// liaison O to O entity UserDetails->User
-	@OneToOne(cascade = { CascadeType.ALL })
-	private List<User> user = new ArrayList<User>();
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	private User user = new User();
 
 	public UserDetails() {
 		super();
 	}
 
-	public UserDetails(Integer user, Integer user_Details, String rue, String ville, String entreprise,
-			String code_postal) {
+	public UserDetails(Integer id_User_Details, String rue, String ville, String entreprise, String code_postal,
+			User user) {
 		super();
-		User = user;
-		id_User_Details = user_Details;
+		this.id_User_Details = id_User_Details;
 		this.rue = rue;
 		this.ville = ville;
 		this.entreprise = entreprise;
 		this.code_postal = code_postal;
+		this.user = user;
 	}
 
-	public Integer getUser() {
-		return User;
-	}
-
-	public void setUser(Integer user) {
-		User = user;
-	}
-
-	public Integer getUser_Details() {
+	public Integer getId_User_Details() {
 		return id_User_Details;
 	}
 
-	public void setUser_Details(Integer user_Details) {
-		id_User_Details = user_Details;
+	public void setId_User_Details(Integer id_User_Details) {
+		this.id_User_Details = id_User_Details;
 	}
 
 	public String getRue() {
@@ -91,10 +79,18 @@ public class UserDetails {
 		this.code_postal = code_postal;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
-		return "UserDetails [User=" + User + ", User_Details=" + id_User_Details + ", rue=" + rue + ", ville=" + ville
-				+ ", entreprise=" + entreprise + ", code_postal=" + code_postal + "]";
+		return "UserDetails [id_User_Details=" + id_User_Details + ", rue=" + rue + ", ville=" + ville + ", entreprise="
+				+ entreprise + ", code_postal=" + code_postal + ", user=" + user + "]";
 	}
 
 }

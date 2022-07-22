@@ -12,8 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-import com.example.entities.Sport;
-
 @Entity
 public class User {
 
@@ -25,7 +23,6 @@ public class User {
 	private String prenom;
 	private String mdp;
 	private String email;
-	private Integer id_user_details;
 
 	// liaison M to M entity User->Session
 	@ManyToMany(cascade = { CascadeType.ALL })
@@ -36,21 +33,24 @@ public class User {
 	private List<Role> role = new ArrayList<Role>();
 
 	// liaison O to O entity User->userDetails
-	@OneToOne(cascade = { CascadeType.ALL })
-	private List<UserDetails> userdetails = new ArrayList<UserDetails>();
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	private UserDetails userdetails = new UserDetails();
 
 	public User() {
 		super();
 	}
 
-	public User(Integer id_user, String nom, String prenom, String mdp, String email, Integer id_user_details) {
+	public User(Integer id_user, String nom, String prenom, String mdp, String email, List<Session> session,
+			List<Role> role, UserDetails userdetails) {
 		super();
 		this.id_user = id_user;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.mdp = mdp;
 		this.email = email;
-		this.id_user_details = id_user_details;
+		this.session = session;
+		this.role = role;
+		this.userdetails = userdetails;
 	}
 
 	public Integer getId_user() {
@@ -93,12 +93,34 @@ public class User {
 		this.email = email;
 	}
 
-	public Integer getId_user_details() {
-		return id_user_details;
+	public List<Session> getSession() {
+		return session;
 	}
 
-	public void setId_user_details(Integer id_user_details) {
-		this.id_user_details = id_user_details;
+	public void setSession(List<Session> session) {
+		this.session = session;
 	}
 
+	public List<Role> getRole() {
+		return role;
+	}
+
+	public void setRole(List<Role> role) {
+		this.role = role;
+	}
+
+	public UserDetails getUserdetails() {
+		return userdetails;
+	}
+
+	public void setUserdetails(UserDetails userdetails) {
+		this.userdetails = userdetails;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id_user=" + id_user + ", nom=" + nom + ", prenom=" + prenom + ", mdp=" + mdp + ", email=" + email
+				+ ", session=" + session + ", role=" + role + ", userdetails=" + userdetails + "]";
+	}
 }
+	

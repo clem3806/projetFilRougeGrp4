@@ -1,8 +1,5 @@
 package com.example.demo.entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
 
@@ -11,8 +8,8 @@ public class Prerequis {
 	private String id_prerequis ;
 	
 	// liaison O to O entity Prerequis ->Formation
-	@OneToOne(cascade = { CascadeType.ALL })
-	private List<Formation> formation = new ArrayList<Formation>();
+	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	private Formation formation = new Formation();
 
 	public Prerequis() {
 		super();
