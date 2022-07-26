@@ -40,13 +40,14 @@ public class Formation {
 	/** The contact. */
 	// liaison O to O entity Formation->Contact
 	@OneToOne(cascade = { CascadeType.ALL })
-	private List<Contact> contact = new ArrayList<Contact>();
+	private Contact contact = new Contact();
 
 	/** The prerequis. */
 	// liaison O to O entity Formation->Prerequis
 	@OneToOne(cascade = { CascadeType.ALL })
-	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
+	private Prerequis prerequis = new Prerequis();
 
+<<<<<<< HEAD
 	/** The session. */
 	// liaison O to O entity Formation->Session
 	@OneToMany(cascade = { CascadeType.ALL })
@@ -56,6 +57,15 @@ public class Formation {
 	// liaison O to O entity Formation->Theme
 	@OneToMany(cascade = { CascadeType.ALL })
 	private List<Theme> theme = new ArrayList<Theme>();
+=======
+	// liaison O to M entity Formation->Session
+	@OneToMany(cascade = { CascadeType.ALL })
+	private List<Session> session = new ArrayList<Session>();
+
+	// liaison M to O entity Formation->Theme
+	@ManyToOne(cascade = { CascadeType.ALL })
+	private Theme theme = new Theme();
+>>>>>>> 39dc05c7de54df222c83586cff1ec5db6aec350c
 
 	/**
 	 * Instantiates a new formation.

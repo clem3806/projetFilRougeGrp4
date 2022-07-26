@@ -35,13 +35,21 @@ public class Session {
 	/** The date. */
 	private Integer date;
 
+<<<<<<< HEAD
 	/** The formation. */
 	// liaison O to O entity Session->Formation
+=======
+	// liaison M to O entity Session->Formation
+>>>>>>> 39dc05c7de54df222c83586cff1ec5db6aec350c
 	@ManyToOne(cascade = { CascadeType.ALL })
-	private List<Formation> formation = new ArrayList<Formation>();
+	private Formation formation = new Formation();
 	
+<<<<<<< HEAD
 	/** The user. */
 	// liaison O to O entity Session->User
+=======
+	// liaison M to M entity Session->User
+>>>>>>> 39dc05c7de54df222c83586cff1ec5db6aec350c
 	@ManyToMany(cascade = { CascadeType.ALL })
 	private List<Utilisateurs> user = new ArrayList<Utilisateurs>();
 

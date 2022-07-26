@@ -32,6 +32,7 @@ public class Theme {
 	/** The libelle. */
 	private String libelle;
 	
+<<<<<<< HEAD
 	/** The formation. */
 	// liaison O to O entity Theme->Formation
 		@OneToMany(cascade = { CascadeType.ALL })
@@ -39,8 +40,15 @@ public class Theme {
 		
 		/** The domaine. */
 		// liaison O to O entity Theme->Domaine
+=======
+	// liaison O to M entity Theme->Formation
+		@OneToMany(cascade = { CascadeType.ALL })
+		private List<Formation> formation = new ArrayList<Formation>();
+		
+		// liaison M to O entity Theme->Domaine
+>>>>>>> 39dc05c7de54df222c83586cff1ec5db6aec350c
 		@ManyToOne(cascade = { CascadeType.ALL })
-		private List<Domaine> domaine = new ArrayList<Domaine>();
+		private Domaine domaine = new Domaine();
 
 
 	/**

@@ -31,7 +31,7 @@ public class Domaine {
 	/** The theme. */
 	// liaison O to O entity Domaine->Theme
 		@OneToMany(cascade = { CascadeType.ALL })
-		private List<Theme> theme = new ArrayList<Theme>();
+		private Theme theme = new Theme();
 
 
 	/**
