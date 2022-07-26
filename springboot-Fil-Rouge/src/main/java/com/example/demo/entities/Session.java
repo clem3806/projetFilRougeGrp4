@@ -24,11 +24,11 @@ public class Session {
 	private String id_Formation;
 	private Integer date;
 
-	// liaison O to O entity Session->Formation
+	// liaison M to O entity Session->Formation
 	@ManyToOne(cascade = { CascadeType.ALL })
-	private List<Formation> formation = new ArrayList<Formation>();
+	private Formation formation = new Formation();
 	
-	// liaison O to O entity Session->User
+	// liaison M to M entity Session->User
 	@ManyToMany(cascade = { CascadeType.ALL })
 	private List<User> user = new ArrayList<User>();
 

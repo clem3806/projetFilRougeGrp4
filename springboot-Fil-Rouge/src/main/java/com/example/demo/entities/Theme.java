@@ -23,13 +23,13 @@ public class Theme {
 	private String id_domaine;
 	private String libelle;
 	
-	// liaison O to O entity Theme->Formation
+	// liaison O to M entity Theme->Formation
 		@OneToMany(cascade = { CascadeType.ALL })
 		private List<Formation> formation = new ArrayList<Formation>();
 		
-		// liaison O to O entity Theme->Domaine
+		// liaison M to O entity Theme->Domaine
 		@ManyToOne(cascade = { CascadeType.ALL })
-		private List<Domaine> domaine = new ArrayList<Domaine>();
+		private Domaine domaine = new Domaine();
 
 
 	public Theme() {

@@ -26,19 +26,19 @@ public class Formation {
 
 	// liaison O to O entity Formation->Contact
 	@OneToOne(cascade = { CascadeType.ALL })
-	private List<Contact> contact = new ArrayList<Contact>();
+	private Contact contact = new Contact();
 
 	// liaison O to O entity Formation->Prerequis
 	@OneToOne(cascade = { CascadeType.ALL })
-	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
+	private Prerequis prerequis = new Prerequis();
 
-	// liaison O to O entity Formation->Session
+	// liaison O to M entity Formation->Session
 	@OneToMany(cascade = { CascadeType.ALL })
 	private List<Session> session = new ArrayList<Session>();
 
-	// liaison O to O entity Formation->Theme
-	@OneToMany(cascade = { CascadeType.ALL })
-	private List<Theme> theme = new ArrayList<Theme>();
+	// liaison M to O entity Formation->Theme
+	@ManyToOne(cascade = { CascadeType.ALL })
+	private Theme theme = new Theme();
 
 	public Formation() {
 		super();

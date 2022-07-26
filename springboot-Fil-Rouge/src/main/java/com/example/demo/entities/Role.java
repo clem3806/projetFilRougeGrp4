@@ -21,7 +21,7 @@ public class Role {
 	private String id_role;
 	private String title;
 	
-	// liaison O to O entity Role->User
+	// liaison M to M entity Role->User
 		@ManyToMany(cascade = { CascadeType.ALL })
 		private List<User> user = new ArrayList<User>();
 
