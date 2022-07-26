@@ -27,13 +27,10 @@ public class Role {
 	
 	/** The title. */
 	private String title;
-	
-<<<<<<< HEAD
+
+
 	/** The user. */
-	// liaison O to O entity Role->User
-=======
 	// liaison M to M entity Role->User
->>>>>>> 39dc05c7de54df222c83586cff1ec5db6aec350c
 		@ManyToMany(cascade = { CascadeType.ALL })
 		private List<Utilisateurs> user = new ArrayList<Utilisateurs>();
 
