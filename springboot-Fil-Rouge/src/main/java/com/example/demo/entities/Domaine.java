@@ -25,7 +25,7 @@ public class Domaine {
 	private String libelle;
 	
 	/** The theme. */
-	// liaison O to O entity Domaine->Theme
+	// liaison O to M entity Domaine->Theme
 		@OneToMany(cascade = { CascadeType.ALL })
 		private Theme theme = new Theme();
 

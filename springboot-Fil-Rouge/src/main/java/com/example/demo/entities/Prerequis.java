@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
  */
 public class Prerequis {
 
+	// on va avoir besoin de modifier ce bordel *énormément*
 	/** The id prerequis. */
 	private String id_prerequis ;
 	
