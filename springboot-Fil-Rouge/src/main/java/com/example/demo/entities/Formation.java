@@ -32,9 +32,6 @@ public class Formation {
 	
 	/** The id theme. */
 	private String id_theme;
-	
-	/** The id contact. */
-	private String id_contact;
 
 	/** The contact. */
 	// liaison O to O entity Formation->Contact
@@ -73,12 +70,11 @@ public class Formation {
 	 * @param id_prerequis the id prerequis
 	 * @param id_contact the id contact
 	 */
-	public Formation(String id_Formation, String libelle, String id_theme, String id_contact) {
+	public Formation(String id_Formation, String libelle, String id_theme) {
 		super();
 		this.id_Formation = id_Formation;
 		this.libelle = libelle;
 		this.id_theme = id_theme;
-		this.id_contact = id_contact;
 	}
 
 	/**
@@ -135,23 +131,6 @@ public class Formation {
 		this.id_theme = id_theme;
 	}
 
-	/**
-	 * Gets the id contact.
-	 *
-	 * @return the id contact
-	 */
-	public String getId_contact() {
-		return id_contact;
-	}
-
-	/**
-	 * Sets the id contact.
-	 *
-	 * @param id_contact the new id contact
-	 */
-	public void setId_contact(String id_contact) {
-		this.id_contact = id_contact;
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -159,8 +138,7 @@ public class Formation {
 	
 	@Override
 	public String toString() {
-		return "Formation [id_Formation=" + id_Formation + ", libelle=" + libelle + ", id_theme=" + id_theme
-				+ ", id_contact=" + id_contact + "]";
+		return "Formation [id_Formation=" + id_Formation + ", libelle=" + libelle + ", id_theme=" + id_theme + "]";
 	}
 
 }
