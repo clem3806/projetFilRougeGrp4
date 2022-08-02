@@ -52,6 +52,11 @@ public class Utilisateurs {
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
 	private UtilisateursDetails userdetails = new UtilisateursDetails();
 
+	/** The prerequis. */
+	// liaison M to M entity Utilisateurs -> Prerequis
+	@ManyToMany (cascade = { CascadeType.ALL })
+	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
+	
 	/**
 	 * Instantiates a new utilisateurs.
 	 */
