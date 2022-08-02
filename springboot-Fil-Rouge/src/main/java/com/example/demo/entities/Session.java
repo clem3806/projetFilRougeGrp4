@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 // TODO: Auto-generated Javadoc
@@ -33,8 +33,10 @@ public class Session {
 	private String id_Formation;
 	
 	/** The date. */
-	private Integer date;
-
+	private Date date;
+	
+	/** The lieu*/
+	private String lieu;
 
 	/** The formation. */
 	// liaison M to O entity Session->Formation
@@ -61,12 +63,13 @@ public class Session {
 	 * @param id_Formation the id formation
 	 * @param date the date
 	 */
-	public Session(String id_session, String libelle, String id_Formation, Integer date) {
+	public Session(String id_session, String libelle, String id_Formation, Date date, String lieu) {
 		super();
 		this.id_session = id_session;
 		this.libelle = libelle;
 		this.id_Formation = id_Formation;
 		this.date = date;
+		this.setLieu(lieu);
 	}
 
 	/**
@@ -128,7 +131,7 @@ public class Session {
 	 *
 	 * @return the date
 	 */
-	public Integer getDate() {
+	public Date getDate() {
 		return date;
 	}
 
@@ -137,7 +140,7 @@ public class Session {
 	 *
 	 * @param date the new date
 	 */
-	public void setDate(Integer date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
@@ -149,6 +152,14 @@ public class Session {
 	public String toString() {
 		return "Session [id_session=" + id_session + ", libelle=" + libelle + ", id_Formation=" + id_Formation
 				+ ", date=" + date + "]";
+	}
+
+	public String getLieu() {
+		return lieu;
+	}
+
+	public void setLieu(String lieu) {
+		this.lieu = lieu;
 	}
 
 }
