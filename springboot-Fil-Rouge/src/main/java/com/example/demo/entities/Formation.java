@@ -9,12 +9,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Formation.
  */
@@ -30,9 +31,6 @@ public class Formation {
 	/** The libelle. */
 	private String libelle;
 	
-	/** The id theme. */
-	private String id_theme;
-
 	/** The contact. */
 	// liaison O to O entity Formation->Contact
 	@OneToOne(cascade = { CascadeType.ALL })
@@ -41,7 +39,8 @@ public class Formation {
 
 	/** The prerequis. */
 	// liaison M to M entity Formation->Prerequis
-	@OneToOne(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "prerequis_formation", joinColumns = { @JoinColumn(name = "id_Formation") }, inverseJoinColumns = { @JoinColumn(name = "id_prerequis") })
 	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
 
 	/** The session. */
@@ -52,6 +51,7 @@ public class Formation {
 	/** The theme. */
 	// liaison M to O entity Formation->Theme
 	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_theme")
 	private Theme theme = new Theme();
 
 	/**
@@ -70,11 +70,10 @@ public class Formation {
 	 * @param id_prerequis the id prerequis
 	 * @param id_contact the id contact
 	 */
-	public Formation(String id_Formation, String libelle, String id_theme) {
+	public Formation(String id_Formation, String libelle) {
 		super();
 		this.id_Formation = id_Formation;
 		this.libelle = libelle;
-		this.id_theme = id_theme;
 	}
 
 	/**
@@ -113,24 +112,6 @@ public class Formation {
 		this.libelle = libelle;
 	}
 
-	/**
-	 * Gets the id theme.
-	 *
-	 * @return the id theme
-	 */
-	public String getId_theme() {
-		return id_theme;
-	}
-
-	/**
-	 * Sets the id theme.
-	 *
-	 * @param id_theme the new id theme
-	 */
-	public void setId_theme(String id_theme) {
-		this.id_theme = id_theme;
-	}
-
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -138,7 +119,7 @@ public class Formation {
 	
 	@Override
 	public String toString() {
-		return "Formation [id_Formation=" + id_Formation + ", libelle=" + libelle + ", id_theme=" + id_theme + "]";
+		return "Formation [id_Formation=" + id_Formation + ", libelle=" + libelle + "]";
 	}
 
 }

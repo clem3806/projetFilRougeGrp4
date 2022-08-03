@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UtilisateursDetails.
  */

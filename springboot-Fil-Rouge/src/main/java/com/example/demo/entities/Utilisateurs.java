@@ -12,7 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Utilisateurs.
  */

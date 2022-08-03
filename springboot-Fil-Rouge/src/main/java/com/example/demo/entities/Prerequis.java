@@ -6,7 +6,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.ManyToMany;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Prerequis.
  */

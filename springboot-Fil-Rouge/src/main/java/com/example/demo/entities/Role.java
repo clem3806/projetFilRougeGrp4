@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Role.
  */

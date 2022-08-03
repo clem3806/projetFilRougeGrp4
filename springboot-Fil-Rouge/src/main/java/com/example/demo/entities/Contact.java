@@ -3,7 +3,6 @@ package com.example.demo.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Contact.
  */
