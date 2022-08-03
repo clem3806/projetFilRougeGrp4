@@ -3,14 +3,13 @@ package com.example.demo.entities;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Contact.
  */
 public class Contact {
 
 	/** The id contact. */
-	private String id_contact ;
+	private Integer id_contact ;
 	
 	/** The formation. */
 	// liaison O to O entity Contact->Formation
@@ -29,7 +28,7 @@ public class Contact {
 	 *
 	 * @param id_contact the id contact
 	 */
-	public Contact(String id_contact) {
+	public Contact(Integer id_contact) {
 		super();
 		this.id_contact = id_contact;
 	}
@@ -39,7 +38,7 @@ public class Contact {
 	 *
 	 * @return the id contact
 	 */
-	public String getId_contact() {
+	public Integer getId_contact() {
 		return id_contact;
 	}
 
@@ -48,7 +47,7 @@ public class Contact {
 	 *
 	 * @param id_contact the new id contact
 	 */
-	public void setId_contact(String id_contact) {
+	public void setId_contact(Integer id_contact) {
 		this.id_contact = id_contact;
 	}
 

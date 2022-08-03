@@ -8,12 +8,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Formation.
  */
@@ -29,24 +31,17 @@ public class Formation {
 	/** The libelle. */
 	private String libelle;
 	
-	/** The id theme. */
-	private String id_theme;
-	
-	/** The id prerequis. */
-	private String id_prerequis;
-	
-	/** The id contact. */
-	private String id_contact;
-
 	/** The contact. */
 	// liaison O to O entity Formation->Contact
 	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_contact")
 	private Contact contact = new Contact();
 
 	/** The prerequis. */
-	// liaison O to O entity Formation->Prerequis
-	@OneToOne(cascade = { CascadeType.ALL })
-	private Prerequis prerequis = new Prerequis();
+	// liaison M to M entity Formation->Prerequis
+	@ManyToMany(cascade = { CascadeType.ALL })
+	@JoinTable(name = "prerequis_formation", joinColumns = { @JoinColumn(name = "id_Formation") }, inverseJoinColumns = { @JoinColumn(name = "id_prerequis") })
+	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
 
 	/** The session. */
 	// liaison O to M entity Formation->Session
@@ -56,6 +51,7 @@ public class Formation {
 	/** The theme. */
 	// liaison M to O entity Formation->Theme
 	@ManyToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_theme")
 	private Theme theme = new Theme();
 
 	/**
@@ -70,17 +66,11 @@ public class Formation {
 	 *
 	 * @param id_Formation the id formation
 	 * @param libelle the libelle
-	 * @param id_theme the id theme
-	 * @param id_prerequis the id prerequis
-	 * @param id_contact the id contact
 	 */
-	public Formation(String id_Formation, String libelle, String id_theme, String id_prerequis, String id_contact) {
+	public Formation(String id_Formation, String libelle) {
 		super();
 		this.id_Formation = id_Formation;
 		this.libelle = libelle;
-		this.id_theme = id_theme;
-		this.id_prerequis = id_prerequis;
-		this.id_contact = id_contact;
 	}
 
 	/**
@@ -119,59 +109,6 @@ public class Formation {
 		this.libelle = libelle;
 	}
 
-	/**
-	 * Gets the id theme.
-	 *
-	 * @return the id theme
-	 */
-	public String getId_theme() {
-		return id_theme;
-	}
-
-	/**
-	 * Sets the id theme.
-	 *
-	 * @param id_theme the new id theme
-	 */
-	public void setId_theme(String id_theme) {
-		this.id_theme = id_theme;
-	}
-
-	/**
-	 * Gets the id prerequis.
-	 *
-	 * @return the id prerequis
-	 */
-	public String getId_prerequis() {
-		return id_prerequis;
-	}
-
-	/**
-	 * Sets the id prerequis.
-	 *
-	 * @param id_prerequis the new id prerequis
-	 */
-	public void setId_prerequis(String id_prerequis) {
-		this.id_prerequis = id_prerequis;
-	}
-
-	/**
-	 * Gets the id contact.
-	 *
-	 * @return the id contact
-	 */
-	public String getId_contact() {
-		return id_contact;
-	}
-
-	/**
-	 * Sets the id contact.
-	 *
-	 * @param id_contact the new id contact
-	 */
-	public void setId_contact(String id_contact) {
-		this.id_contact = id_contact;
-	}
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -179,8 +116,7 @@ public class Formation {
 	
 	@Override
 	public String toString() {
-		return "Formation [id_Formation=" + id_Formation + ", libelle=" + libelle + ", id_theme=" + id_theme
-				+ ", id_prerequis=" + id_prerequis + ", id_contact=" + id_contact + "]";
+		return "Formation [id_Formation=" + id_Formation + ", libelle=" + libelle + "]";
 	}
 
 }
