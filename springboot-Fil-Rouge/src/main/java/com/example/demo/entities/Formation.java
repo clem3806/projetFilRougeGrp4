@@ -66,9 +66,6 @@ public class Formation {
 	 *
 	 * @param id_Formation the id formation
 	 * @param libelle the libelle
-	 * @param id_theme the id theme
-	 * @param id_prerequis the id prerequis
-	 * @param id_contact the id contact
 	 */
 	public Formation(String id_Formation, String libelle) {
 		super();

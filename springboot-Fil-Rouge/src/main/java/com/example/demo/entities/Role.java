@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 
@@ -29,7 +31,8 @@ public class Role {
 
 	/** The user. */
 	// liaison M to M entity Role->User
-		@ManyToMany(cascade = { CascadeType.ALL })
+		@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE })
+		@JoinTable(name = "prerequis_formation", joinColumns = { @JoinColumn(name = "id_Formation") }, inverseJoinColumns = { @JoinColumn(name = "id_prerequis") })
 		private List<Utilisateurs> user = new ArrayList<Utilisateurs>();
 
 
