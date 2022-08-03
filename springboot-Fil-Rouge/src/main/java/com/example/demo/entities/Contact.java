@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
@@ -13,7 +14,8 @@ public class Contact {
 	
 	/** The formation. */
 	// liaison O to O entity Contact->Formation
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name = "id_formation")
 	private Formation formation = new Formation();
 
 	/**

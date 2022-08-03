@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,7 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
 /**
- * The Class Formation.
+ * The Class formation.
  */
 @Entity
 public class Formation {
@@ -26,30 +27,30 @@ public class Formation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
 	@SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
-	private String id_Formation;
+	private String id_formation;
 	
 	/** The libelle. */
 	private String libelle;
 	
 	/** The contact. */
-	// liaison O to O entity Formation->Contact
+	// liaison O to O entity formation->Contact
 	@OneToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_contact")
 	private Contact contact = new Contact();
 
 	/** The prerequis. */
-	// liaison M to M entity Formation->Prerequis
-	@ManyToMany(cascade = { CascadeType.ALL })
-	@JoinTable(name = "prerequis_formation", joinColumns = { @JoinColumn(name = "id_Formation") }, inverseJoinColumns = { @JoinColumn(name = "id_prerequis") })
+	// liaison M to M entity formation->Prerequis
+	@ManyToMany(cascade = {  CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE  })
+	@JoinTable(name = "prerequis_formation", joinColumns = { @JoinColumn(name = "id_formation") }, inverseJoinColumns = { @JoinColumn(name = "id_prerequis") })
 	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
 
-	/** The session. */
-	// liaison O to M entity Formation->Session
-	@OneToMany(cascade = { CascadeType.ALL })
-	private List<Session> session = new ArrayList<Session>();
+	/** The sessions. */
+	// liaison O to M entity formation->Session
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "formation")
+	private List<Session> sessions = new ArrayList<Session>();
 
 	/** The theme. */
-	// liaison M to O entity Formation->Theme
+	// liaison M to O entity formation->Theme
 	@ManyToOne(cascade = { CascadeType.ALL })
 	@JoinColumn(name = "id_theme")
 	private Theme theme = new Theme();
@@ -64,12 +65,12 @@ public class Formation {
 	/**
 	 * Instantiates a new formation.
 	 *
-	 * @param id_Formation the id formation
+	 * @param id_formation the id formation
 	 * @param libelle the libelle
 	 */
-	public Formation(String id_Formation, String libelle) {
+	public Formation(String id_formation, String libelle) {
 		super();
-		this.id_Formation = id_Formation;
+		this.id_formation = id_formation;
 		this.libelle = libelle;
 	}
 
@@ -78,17 +79,17 @@ public class Formation {
 	 *
 	 * @return the id formation
 	 */
-	public String getId_Formation() {
-		return id_Formation;
+	public String getId_formation() {
+		return id_formation;
 	}
 
 	/**
 	 * Sets the id formation.
 	 *
-	 * @param id_Formation the new id formation
+	 * @param id_formation the new id formation
 	 */
-	public void setId_Formation(String id_Formation) {
-		this.id_Formation = id_Formation;
+	public void setId_formation(String id_formation) {
+		this.id_formation = id_formation;
 	}
 
 	/**
@@ -116,7 +117,7 @@ public class Formation {
 	
 	@Override
 	public String toString() {
-		return "Formation [id_Formation=" + id_Formation + ", libelle=" + libelle + "]";
+		return "formation [id_formation=" + id_formation + ", libelle=" + libelle + "]";
 	}
 
 }

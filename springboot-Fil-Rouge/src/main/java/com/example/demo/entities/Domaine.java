@@ -23,10 +23,10 @@ public class Domaine {
 	/** The libelle. */
 	private String libelle;
 	
-	/** The theme. */
+	/** The themes. */
 	// liaison O to M entity Domaine->Theme
-		@OneToMany(cascade = { CascadeType.ALL })
-		private Theme theme = new Theme();
+		@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "domaine")
+		private Theme themes = new Theme();
 
 
 	/**

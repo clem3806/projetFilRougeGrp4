@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
@@ -35,6 +36,7 @@ public class UtilisateursDetails {
 	/** The user. */
 	// liaison O to O entity UserDetails->User
 	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@JoinColumn(name = "id_user")
 	private Utilisateurs user = new Utilisateurs();
 
 	/**
@@ -180,7 +182,7 @@ public class UtilisateursDetails {
 	@Override
 	public String toString() {
 		return "UserDetails [id_User_Details=" + id_User_Details + ", rue=" + rue + ", ville=" + ville + ", entreprise="
-				+ entreprise + ", code_postal=" + code_postal + ", user=" + user + "]";
+				+ entreprise + ", code_postal=" + code_postal + "]";
 	}
 
 }

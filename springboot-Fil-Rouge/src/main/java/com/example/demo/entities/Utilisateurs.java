@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -38,22 +40,26 @@ public class Utilisateurs {
 
 	/** The session. */
 	// liaison M to M entity User->Session
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.PERSIST })
+	@JoinTable(name = "utilisateurs_session", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = { @JoinColumn(name = "id_session") })
 	private List<Session> session = new ArrayList<Session>();
 
 	/** The role. */
 	// liaison M to M entity User->Role
-	@ManyToMany(cascade = { CascadeType.ALL })
-	private List<Role> role = new ArrayList<Role>();
+	@ManyToMany(cascade = { CascadeType.PERSIST })
+	@JoinTable(name = "roles_utilisateurs", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = { @JoinColumn(name = "id_role") })
+	private List<Role> roles = new ArrayList<Role>();
 
 	/** The userdetails. */
 	// liaison O to O entity User->userDetails
-	@OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE })
+	@OneToOne(cascade = { CascadeType.ALL })
+	@JoinColumn(name="id_User_Details")
 	private UtilisateursDetails userdetails = new UtilisateursDetails();
 
 	/** The prerequis. */
-	// liaison M to M entity Utilisateurs -> Prerequis
-	@ManyToMany (cascade = { CascadeType.ALL })
+	//liaison M to M entity User->Prerequis
+	@ManyToMany (cascade = { CascadeType.MERGE })
+	@JoinTable(name = "prerequis_utilisateurs", joinColumns = { @JoinColumn(name = "id_user") }, inverseJoinColumns = { @JoinColumn(name = "id_prerequis") })
 	private List<Prerequis> prerequis = new ArrayList<Prerequis>();
 	
 	/**
@@ -76,7 +82,7 @@ public class Utilisateurs {
 	 * @param userdetails the userdetails
 	 */
 	public Utilisateurs(Integer id_user, String nom, String prenom, String mdp, String email, List<Session> session,
-			List<Role> role, UtilisateursDetails userdetails) {
+			List<Role> roles, UtilisateursDetails userdetails) {
 		super();
 		this.id_user = id_user;
 		this.nom = nom;
@@ -84,7 +90,7 @@ public class Utilisateurs {
 		this.mdp = mdp;
 		this.email = email;
 		this.session = session;
-		this.role = role;
+		this.roles = roles;
 		this.userdetails = userdetails;
 	}
 
@@ -202,7 +208,7 @@ public class Utilisateurs {
 	 * @return the role
 	 */
 	public List<Role> getRole() {
-		return role;
+		return roles;
 	}
 
 	/**
@@ -210,8 +216,8 @@ public class Utilisateurs {
 	 *
 	 * @param role the new role
 	 */
-	public void setRole(List<Role> role) {
-		this.role = role;
+	public void setRole(List<Role> roles) {
+		this.roles = roles;
 	}
 
 	/**
@@ -238,8 +244,7 @@ public class Utilisateurs {
 	
 	@Override
 	public String toString() {
-		return "User [id_user=" + id_user + ", nom=" + nom + ", prenom=" + prenom + ", mdp=" + mdp + ", email=" + email
-				+ ", session=" + session + ", role=" + role + ", userdetails=" + userdetails + "]";
+		return "User [id_user=" + id_user + ", nom=" + nom + ", prenom=" + prenom + ", mdp=" + mdp + ", email=" + email + "]";
 	}
 }
 	

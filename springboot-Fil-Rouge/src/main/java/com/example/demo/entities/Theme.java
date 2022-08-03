@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -24,20 +25,19 @@ public class Theme {
     @SequenceGenerator(name = "id_Sequence", sequenceName = "ID_SEQ")
 	private String id_theme;
 	
-	/** The id domaine. */
-	private String id_domaine;
 	
 	/** The libelle. */
 	private String libelle;
 	
 		/** The formation. */
 		// liaison O to M entity Theme->Formation
-		@OneToMany(cascade = { CascadeType.ALL })
+		@OneToMany(cascade = { CascadeType.ALL }, mappedBy = "theme")
 		private List<Formation> formation = new ArrayList<Formation>();
 
 		/** The domaine. */
 		// liaison M to O entity Theme->Domaine
 		@ManyToOne(cascade = { CascadeType.ALL })
+		@JoinColumn(name = "theme")
 		private Domaine domaine = new Domaine();
 
 
@@ -52,13 +52,11 @@ public class Theme {
 	 * Instantiates a new theme.
 	 *
 	 * @param id_theme the id theme
-	 * @param id_domaine the id domaine
 	 * @param libelle the libelle
 	 */
-	public Theme(String id_theme, String id_domaine, String libelle) {
+	public Theme(String id_theme, String libelle) {
 		super();
 		this.id_theme = id_theme;
-		this.id_domaine = id_domaine;
 		this.libelle = libelle;
 	}
 
@@ -78,24 +76,6 @@ public class Theme {
 	 */
 	public void setId_theme(String id_theme) {
 		this.id_theme = id_theme;
-	}
-
-	/**
-	 * Gets the id domaine.
-	 *
-	 * @return the id domaine
-	 */
-	public String getId_domaine() {
-		return id_domaine;
-	}
-
-	/**
-	 * Sets the id domaine.
-	 *
-	 * @param id_domaine the new id domaine
-	 */
-	public void setId_domaine(String id_domaine) {
-		this.id_domaine = id_domaine;
 	}
 
 	/**
@@ -122,7 +102,7 @@ public class Theme {
 	
 	@Override
 	public String toString() {
-		return "Theme [id_theme=" + id_theme + ", id_domaine=" + id_domaine + ", libelle=" + libelle + "]";
+		return "Theme [id_theme=" + id_theme + ", libelle=" + libelle + "]";
 	}
 
 }

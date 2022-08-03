@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -39,12 +41,13 @@ public class Session {
 
 	/** The formation. */
 	// liaison M to O entity Session->Formation
-	@ManyToOne(cascade = { CascadeType.ALL })
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_formation")
 	private Formation formation = new Formation();
 	
 	/** The user. */
 	// liaison M to M entity Session->User
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { CascadeType.PERSIST }, mappedBy = "sessions")
 	private List<Utilisateurs> user = new ArrayList<Utilisateurs>();
 
 	/**

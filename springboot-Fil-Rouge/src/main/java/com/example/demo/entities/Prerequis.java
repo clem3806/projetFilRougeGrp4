@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 
 /**
@@ -23,12 +24,12 @@ public class Prerequis {
 	
 	/** The formation. */
 	// liaison M to M entity Prerequis ->Formation
-	@ManyToMany (cascade = { CascadeType.ALL })
+	@ManyToMany (mappedBy = "prerequis")
 	private List<Formation> formations = new ArrayList<Formation>();
 
 	/** The users. */
 	// liaison M to M entity Prerequis -> Utilisateurs
-	@ManyToMany (cascade = { CascadeType.ALL })
+	@ManyToMany (mappedBy = "prerequis")
 	private List<Formation> users = new ArrayList<Formation>();
 	
 	/**
