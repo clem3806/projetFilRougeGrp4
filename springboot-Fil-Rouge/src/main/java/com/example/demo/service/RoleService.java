@@ -1,11 +1,10 @@
-package com.example.demo.dao;
+package com.example.demo.service;
 
 import java.util.List;
 import java.util.Optional;
 
+import com.example.demo.dao.RoleRepository;
 import com.example.demo.entities.Role;
-import com.example.demo.service.IService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
