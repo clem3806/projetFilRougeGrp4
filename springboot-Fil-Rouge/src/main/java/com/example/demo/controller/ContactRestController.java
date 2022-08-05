@@ -1,4 +1,6 @@
-package com.example.demo.service;
+package com.example.demo.controller;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,47 +16,76 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.entities.Contact;
+import com.example.demo.service.ContactService;
+import com.example.demo.service.IService;
 
-import antlr.collections.List;
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContactRestController.
+ *
+ * @param <F> the generic type
+ */
 @RestController
 @CrossOrigin(origins = "*")
 public class ContactRestController<F> {
 
+	/** The utilisateur service. */
 	@Autowired
 	private IService<F> utilisateurService;
 
+	/** The contact service. */
 	@Autowired
 	private ContactService contactService;
 
+	/**
+	 * Show all.
+	 *
+	 * @return the list
+	 */
 	// http://localhost:8080/formations
-	@GetMapping(value = "/utilisateur")
+	@GetMapping(value = "/contact")
 	public List<Contact> showAll() {
 		return (List<Contact>) contactService.findAll();
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param c the c
+	 * @return the contact
+	 */
 	// http://localhost:8080/formations
-	@PostMapping(value = "/formations")
-	public contact save(@RequestBody contactService ud) {
-		return contactService.saveOrUpdate(ud);
+	@PostMapping(value = "/contact")
+	public Contact save(@RequestBody Contact c) {
+		return contactService.saveOrUpdate(c);
 	}
 
-	@PutMapping(value = "/utilisateurss/{id}")
-	public ResponseEntity<contactService> edit(@RequestBody Contact contactService, @PathVariable("id") Integer id) {
-		contactService contactToUpdate = contactService.findById(id).orElseThrow(
+	/**
+	 * Edits the.
+	 *
+	 * @param contact the contact
+	 * @param id the id
+	 * @return the response entity
+	 */
+	@PutMapping(value = "/contacts/{id}")
+	public ResponseEntity<Contact> edit(@RequestBody Contact contact, @PathVariable("id") Integer id) {
+		Contact contactToUpdate = contactService.findById(id).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contact is not found with id : " + id));
 
-		contactToUpdate.setNom(contact.getNom());
-		contactToUpdate.setPrenom(contact.getPrenom());
-		contactToUpdate.setRole(contact.getRole());
+		contactToUpdate.setId_contact(contact.getId_contact());
 
 		return new ResponseEntity<>(contactService.saveOrUpdate(contact), HttpStatus.OK);
 	}
-
+	/**
+	 * Delete by id.
+	 *
+	 * @param id the id
+	 * @return the string
+	 */
 	// http://localhost:8080/personnes/3
-	@DeleteMapping("/formations/{id}")
+	@DeleteMapping("/contact/{id}")
 	public String deleteById(@PathVariable Integer id) {
-		contactService.deleteOneContactById(id, id);
+		contactService.delete(id);
 		return "Deleted successfully !";
 
 	}

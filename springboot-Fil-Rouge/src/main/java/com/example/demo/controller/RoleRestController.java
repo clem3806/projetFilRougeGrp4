@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,47 +16,78 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.entities.Role;
+import com.example.demo.entities.Utilisateurs;
 import com.example.demo.service.IService;
+import com.example.demo.service.RoleService;
 
-import antlr.collections.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RoleRestController.
+ */
 @RestController
 @CrossOrigin(origins = "*")
 public class RoleRestController {
-	@Autowired
-	private IService<F> utilisateurService;
 
+	/** The utilisateur service. */
+	@Autowired
+	private IService<Utilisateurs> utilisateurService;
+
+	/** The role service. */
 	@Autowired
 	private RoleService roleService;
 
+	/**
+	 * Show all.
+	 *
+	 * @return the list
+	 */
 	// http://localhost:8080/formations
 	@GetMapping(value = "/role")
 	public List<Role> showAll() {
 		return (List<Role>) roleService.findAll();
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param r the r
+	 * @return the role
+	 */
 	// http://localhost:8080/formations
 	@PostMapping(value = "/roles")
-	public Role save(@RequestBody roleService th) {
-		return roleService.saveOrUpdate(th);
+	public Role save(@RequestBody Role r) {
+		return roleService.saveOrUpdate(r);
 	}
 
+	/**
+	 * Edits the.
+	 *
+	 * @param role the role
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@PutMapping(value = "/roles/{id}")
-	public ResponseEntity<RoletService> edit(@RequestBody Role roleService, @PathVariable("id") Integer id) {
-		roleService RoleToUpdate = roleService.findById(id).orElseThrow(
+	public ResponseEntity<Role> edit(@RequestBody Role role, @PathVariable("id") Integer id) {
+		Role RoleToUpdate = roleService.findById(id).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Role is not found with id : " + id));
 
-		roleToUpdate.setNom(role.getNom());
-		roleToUpdate.setPrenom(role.getPrenom());
-		roleToUpdate.setRole(role.getRole());
+		RoleToUpdate.setId_role(role.getId_role());
+		RoleToUpdate.setTitle(role.getTitle());
 
-		return new ResponseEntity<>(roleService.saveOrUpdate(Role), HttpStatus.OK);
+		return new ResponseEntity<>(roleService.saveOrUpdate(role), HttpStatus.OK);
 	}
 
+	/**
+	 * Delete by id.
+	 *
+	 * @param id the id
+	 * @return the string
+	 */
 	// http://localhost:8080/personnes/3
 	@DeleteMapping("/roles/{id}")
 	public String deleteById(@PathVariable Integer id) {
-		roleService.deleteOneroleById(id, id);
+		roleService.delete(id);
 		return "Deleted successfully !";
 
 	}

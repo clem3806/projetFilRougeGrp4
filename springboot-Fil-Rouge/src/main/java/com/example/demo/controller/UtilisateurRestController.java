@@ -19,28 +19,51 @@ import com.example.demo.entities.Utilisateurs;
 import com.example.demo.service.FormationService;
 import com.example.demo.service.IService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UtilisateurRestController.
+ */
 @RestController
 @CrossOrigin(origins = "*")
-public class UtilisateurRestController<U, F> {
+public class UtilisateurRestController {
 
+	/** The utilisateur service. */
 	@Autowired
-	private IService<F> utilisateurService;
+	private IService<Utilisateurs> utilisateurService;
 
+	/** The formation service. */
 	@Autowired
 	private FormationService formationService;
 
+	/**
+	 * Show all.
+	 *
+	 * @return the list
+	 */
 	// http://localhost:8080/formations
 	@GetMapping(value = "/utilisateur")
 	public List<Utilisateurs> showAll() {
 		return (List<Utilisateurs>) utilisateurService.findAll();
 	}
 
+	/**
+	 * Save.
+	 *
+	 * @param u the u
+	 * @return the utilisateurs
+	 */
 	// http://localhost:8080/formations
 	@PostMapping(value = "/formations")
 	public Utilisateurs save(@RequestBody Utilisateurs u) {
-		return formationService.saveOrUpdate(u);
+		return utilisateurService.saveOrUpdate(u);
 	}
 
+	/**
+	 * Gets the one.
+	 *
+	 * @param id the id
+	 * @return the one
+	 */
 	// http://localhost:8080/utilisateurss/1
 	@GetMapping(value = "/utilisateurss/{id}")
 	public ResponseEntity<Utilisateurs> getOne(@PathVariable("id") int id) {
@@ -49,14 +72,22 @@ public class UtilisateurRestController<U, F> {
 		return new ResponseEntity<>(u, HttpStatus.OK);
 	}
 
+	/**
+	 * Edits the.
+	 *
+	 * @param utilisateurs the utilisateurs
+	 * @param id the id
+	 * @return the response entity
+	 */
 	@PutMapping(value = "/utilisateurss/{id}")
 	public ResponseEntity<Utilisateurs> edit(@RequestBody Utilisateurs utilisateurs, @PathVariable("id") Integer id) {
-		Utilisateurs personToUpdate = utilisateurService.findById(id).orElseThrow(
+		Utilisateurs utilisateurToUpdate = utilisateurService.findById(id).orElseThrow(
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Person is not found with id : " + id));
 
-		personToUpdate.setNom(utilisateurs.getNom());
-		personToUpdate.setPrenom(utilisateurs.getPrenom());
-		personToUpdate.setRole(utilisateurs.getRole());
+		utilisateurToUpdate.setNom(utilisateurs.getNom());
+		utilisateurToUpdate.setPrenom(utilisateurs.getPrenom());
+		utilisateurToUpdate.setMdp(utilisateurs.getMdp());
+		utilisateurToUpdate.setEmail(utilisateurs.getEmail());
 
 		return new ResponseEntity<>(utilisateurService.saveOrUpdate(utilisateurs), HttpStatus.OK);
 	}
