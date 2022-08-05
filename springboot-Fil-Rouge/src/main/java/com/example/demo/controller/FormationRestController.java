@@ -19,7 +19,6 @@ import com.example.demo.entities.Utilisateurs;
 import com.example.demo.service.FormationService;
 import com.example.demo.service.IService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class FormationRestController.
  */

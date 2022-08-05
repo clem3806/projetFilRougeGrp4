@@ -17,11 +17,9 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.example.demo.entities.Utilisateurs;
 import com.example.demo.entities.UtilisateursDetails;
-import com.example.demo.service.FormationService;
 import com.example.demo.service.IService;
-import com.example.demo.service.UtilisateurDetailsService;
+import com.example.demo.service.UtilisateursDetailsService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UtilisateurDetailsRestController.
  */
@@ -35,7 +33,7 @@ public class UtilisateurDetailsRestController {
 
 	/** The utilisateurdetails service. */
 	@Autowired
-	private UtilisateurDetailsService utilisateurdetailsService;
+	private UtilisateursDetailsService utilisateurdetailsService;
 
 	/**
 	 * Show all.

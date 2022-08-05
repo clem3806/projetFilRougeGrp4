@@ -21,7 +21,6 @@ import com.example.demo.service.IService;
 import com.example.demo.service.RoleService;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RoleRestController.
  */

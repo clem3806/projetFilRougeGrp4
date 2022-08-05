@@ -21,7 +21,6 @@ import com.example.demo.service.IService;
 import com.example.demo.service.SessionService;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SessionRestController.
  */

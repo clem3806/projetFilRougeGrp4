@@ -21,7 +21,6 @@ import com.example.demo.service.IService;
 import com.example.demo.service.ThemeService;
 
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ThemeRestController.
  */
@@ -73,7 +72,6 @@ public class ThemeRestController {
 				() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Theme is not found with id : " + id));
 
 		ThemeToUpdate.setId_theme(theme.getId_theme());
-		ThemeToUpdate.setId_domaine(theme.getId_domaine());
 		ThemeToUpdate.setLibelle(theme.getLibelle());
 
 		return new ResponseEntity<>(themeService.saveOrUpdate(theme), HttpStatus.OK);

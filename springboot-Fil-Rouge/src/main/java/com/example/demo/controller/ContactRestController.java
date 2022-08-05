@@ -19,7 +19,6 @@ import com.example.demo.entities.Contact;
 import com.example.demo.service.ContactService;
 import com.example.demo.service.IService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ContactRestController.
  *

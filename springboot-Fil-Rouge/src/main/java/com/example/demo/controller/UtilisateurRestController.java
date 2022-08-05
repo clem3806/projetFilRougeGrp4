@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.example.demo.entities.Formation;
 import com.example.demo.entities.Utilisateurs;
 import com.example.demo.service.FormationService;
 import com.example.demo.service.IService;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UtilisateurRestController.
  */

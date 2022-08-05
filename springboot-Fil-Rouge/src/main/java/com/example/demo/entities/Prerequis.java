@@ -42,9 +42,12 @@ public class Prerequis {
 	 *
 	 * @param id_prerequis the id prerequis
 	 */
-	public Prerequis(String id_prerequis) {
+	public Prerequis(String id_prerequis, Boolean resultat, String reponse, String question) {
 		super();
 		this.id_prerequis = id_prerequis;
+		this.resultat = resultat;
+		this.reponse = reponse;
+		this.question = question;
 	}
 
 	/**
@@ -61,11 +64,8 @@ public class Prerequis {
 	 *
 	 * @param id_prerequis the new id prerequis
 	 */
-	public void setId_prerequis(String id_prerequis, Boolean resultat, String reponse, String question) {
+	public void setId_prerequis(String id_prerequis) {
 		this.id_prerequis = id_prerequis;
-		this.resultat = resultat;
-		this.reponse = reponse;
-		this.question = question;
 	}
 
 	/* (non-Javadoc)
